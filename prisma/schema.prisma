@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id    String @id @default(cuid())
+  name  String @db.VarChar(100)
+  email String @db.VarChar(100)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  bookings Booking[]
+}
+
+model Barbershop {
+  id          String   @id @default(cuid())
+  name        String   @db.VarChar(100)
+  phone       String[]
+  address     String   @db.VarChar(100)
+  description String   @db.Text
+  imageUrl    String   @map("image_url") @db.VarChar(100)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  barbershopServices BarbershopService[]
+}
+
+model BarbershopService {
+  id          String  @id @default(cuid())
+  name        String  @db.VarChar(100)
+  description String  @db.Text
+  imageUrl    String  @map("image_url") @db.VarChar(100)
+  price       Decimal @db.Decimal(10, 2)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  barbershopId String     @map("barbershop_id")
+  barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
+
+  bookings Booking[]
+}
+
+model Booking {
+  id   String   @id @default(cuid())
+  date DateTime
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  serviceId String            @map("service_id")
+  service   BarbershopService @relation(fields: [serviceId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
