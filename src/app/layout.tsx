@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
+
 import { Inter } from 'next/font/google'
+
 import '@/style/globals.css'
+import { Footer } from '@/components/layout/footer'
+import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,7 +16,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang='pt-br' className='dark'>
-      <body className={`${inter.className}`}>{children}</body>
+      <body className={`${inter.className}`}>
+        {children}
+
+        <Toaster />
+
+        <Footer />
+      </body>
     </html>
   )
 }
