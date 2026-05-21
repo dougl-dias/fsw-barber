@@ -1,19 +1,22 @@
 import Image from 'next/image'
 
+import { Search } from 'lucide-react'
+
 import { Header } from '@/components/layout/header'
 
 import { Avatar } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { BarbershopItem } from '@/components/barbershop-item'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { DivideSection } from '@/components/ui/divide-section'
 import { Input } from '@/components/ui/input'
+import { Section } from '@/components/section'
+
 import { quickSearchOptions } from '@/constants/search'
-import { Barbershop } from '@/generated/prisma/client'
+
 import { prisma } from '@/lib/prisma'
-import { Search } from 'lucide-react'
-import Section from '@/components/section'
-import BarbershopItem from '@/components/barbershop-item'
+import { Barbershop } from '@/generated/prisma/client'
 
 export default async function Home() {
   const barbershops: Barbershop[] = await prisma.barbershop.findMany({})

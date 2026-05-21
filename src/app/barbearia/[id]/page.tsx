@@ -2,12 +2,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import ServicesItemProps from '@/components/service-item'
-import Section from '@/components/section'
+import { ChevronLeft, Menu } from 'lucide-react'
+
+import { SidebarBooking } from '@/components/layout/sidebar-booking'
+
 import { Button } from '@/components/ui/button'
 import { DivideSection } from '@/components/ui/divide-section'
-import { ChevronLeft, Menu } from 'lucide-react'
-import PhoneItem from '@/components/phone-item'
+import { PhoneItem } from '@/components/phone-item'
+import { Section } from '@/components/section'
+import { ServicesItem } from '@/components/service-item'
+import { Sheet, SheetTrigger } from '@/components/ui/sheet'
 
 import { prisma } from '@/lib/prisma'
 
@@ -33,16 +37,21 @@ export default async function BarbershopPage({ params }: BarbershopPageProps) {
       <div className='relative h-64'>
         <Image src={barbershop.imageUrl} alt={barbershop.name} fill className='object-cover' />
 
-        <Link
-          href={`/`}
-          className='bg-secondary text-secondary-foreground absolute top-4 left-4 z-20 inline-flex h-9 items-center justify-center rounded-md px-1.5 text-sm font-medium'
-        >
-          <ChevronLeft />
-        </Link>
-
-        <Button variant={'secondary'} size={'icon-lg'} className='absolute top-4 right-4 z-20'>
-          <Menu />
+        <Button variant={'secondary'} size={'icon'} className='absolute top-4 left-4 z-20' asChild>
+          <Link href={`/`}>
+            <ChevronLeft />
+          </Link>
         </Button>
+
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant={'secondary'} size={'icon'} className='absolute top-4 right-4 z-20'>
+              <Menu />
+            </Button>
+          </SheetTrigger>
+
+          {/* <SidebarBooking /> */}
+        </Sheet>
       </div>
 
       {/* Informações */}
@@ -75,7 +84,7 @@ export default async function BarbershopPage({ params }: BarbershopPageProps) {
 
         {barbershop.barbershopServices.map((service) => (
           <div key={service.id}>
-            <ServicesItemProps service={service} />
+            <ServicesItem service={service} />
           </div>
         ))}
       </Section>

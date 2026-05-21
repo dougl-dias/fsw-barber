@@ -6,6 +6,6 @@ interface SectionProps {
   className?: string
 }
 
-export default function Section({ children, className }: SectionProps) {
+export function Section({ children, className }: SectionProps) {
   return <div className={cn('space-y-4 border-t px-5 py-6', className)}>{children}</div>
 }

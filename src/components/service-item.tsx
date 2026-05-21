@@ -1,18 +1,19 @@
 import Image from 'next/image'
-import { Card, CardContent } from './ui/card'
-import { BarbershopService } from '@/generated/prisma/client'
+
+import { SidebarBooking } from './layout/sidebar-booking'
+
 import { Button } from './ui/button'
+import { Card, CardContent } from './ui/card'
+import { Sheet, SheetTrigger } from './ui/sheet'
+
+import { BarbershopService } from '@/generated/prisma/client'
+import { formatPrice } from '@/lib/utils'
 
 interface ServicesItemProps {
   service: BarbershopService
 }
 
-export default function ServicesItem({ service }: ServicesItemProps) {
-  const formatPrice = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(Number(service.price))
-
+export function ServicesItem({ service }: ServicesItemProps) {
   return (
     <Card className='py-3'>
       <CardContent className='flex gap-3 px-3'>
@@ -26,11 +27,17 @@ export default function ServicesItem({ service }: ServicesItemProps) {
           <p className='text-sm text-zinc-500'>{service.description}</p>
 
           <div className='flex items-center justify-between'>
-            <span className='text-primary font-semibold'>{formatPrice}</span>
+            <span className='text-primary font-semibold'>{formatPrice(Number(service.price))}</span>
 
-            <Button variant={'secondary'} size={'sm'}>
-              Reservar
-            </Button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant={'secondary'} size={'sm'}>
+                  Reservar
+                </Button>
+              </SheetTrigger>
+
+              <SidebarBooking />
+            </Sheet>
           </div>
         </div>
       </CardContent>

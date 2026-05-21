@@ -8,7 +8,7 @@ interface PhoneItemProps {
   phone: string
 }
 
-export default function PhoneItem({ phone }: PhoneItemProps) {
+export function PhoneItem({ phone }: PhoneItemProps) {
   const [copied, setCopied] = useState(false)
 
   const handleCopyPhoneClick = async () => {

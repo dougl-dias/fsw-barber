@@ -1,16 +1,19 @@
 import Image from 'next/image'
-
-import { Card, CardContent } from './ui/card'
-import { Barbershop } from '@/generated/prisma/client'
-import { Star } from 'lucide-react'
-import { Badge } from './ui/badge'
 import Link from 'next/link'
+
+import { Star } from 'lucide-react'
+
+import { Badge } from './ui/badge'
+import { Button } from './ui/button'
+import { Card, CardContent } from './ui/card'
+
+import { Barbershop } from '@/generated/prisma/client'
 
 interface CardServiceProps {
   barbershop: Barbershop
 }
 
-export default function BarbershopItem({ barbershop }: CardServiceProps) {
+export function BarbershopItem({ barbershop }: CardServiceProps) {
   return (
     <Card className='max-w-40 p-0'>
       <CardContent className='p-0.5'>
@@ -28,12 +31,9 @@ export default function BarbershopItem({ barbershop }: CardServiceProps) {
 
           <p className='mb-3 truncate text-sm text-zinc-500'>{barbershop.address}</p>
 
-          <Link
-            href={`/barbearia/${barbershop.id}`}
-            className='bg-secondary text-secondary-foreground inline-flex h-8 w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium'
-          >
-            Reservar
-          </Link>
+          <Button variant={'secondary'} className='w-full' asChild>
+            <Link href={`/barbearia/${barbershop.id}`}>Reservar</Link>
+          </Button>
         </div>
       </CardContent>
     </Card>
