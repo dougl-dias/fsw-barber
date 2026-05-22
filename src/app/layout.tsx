@@ -5,6 +5,8 @@ import { Inter } from 'next/font/google'
 import { Footer } from '@/components/layout/footer'
 import { Toaster } from '@/components/ui/sonner'
 
+import AuthProvider from '@/providers/auth'
+
 import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
@@ -20,12 +22,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang='pt-br' className={cn('dark', 'font-sans', inter.variable)}>
       <body className={`${inter.className}`}>
-        <div className='flex h-full flex-col'>
-          <div className='flex-1'>{children}</div>
-          <Footer />
-        </div>
-
-        <Toaster />
+        <AuthProvider>
+          <div className='flex h-full flex-col'>
+            <div className='flex-1'>{children}</div>
+            <Footer />
+          </div>
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   )
