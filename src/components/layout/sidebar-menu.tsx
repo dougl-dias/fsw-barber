@@ -2,12 +2,12 @@ import Image from 'next/image'
 
 import { HomeIcon, CalendarIcon, LogInIcon } from 'lucide-react'
 
-import { Avatar } from '../ui/avatar'
+import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { SheetContent, SheetHeader, SheetTitle } from '../ui/sheet'
 
-import { quickSearchOptions } from '@/constants/search'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
+import { QuickSearchSidebar } from '../quick-search'
 
 export function SidebarMenu() {
   return (
@@ -42,16 +42,16 @@ export function SidebarMenu() {
             </Dialog>
           </div>
 
-          {/* <div className='flex items-center gap-2.5'>
+          <div className='flex items-center gap-2.5'>
             <Avatar className='border-primary size-12 overflow-hidden border-2'>
-              <Image src='/avatar.png' alt='Nome' fill className='object-cover' />
+              <AvatarImage src='/avatar.png' alt='Nome' className='object-cover' />
             </Avatar>
 
             <div>
               <p>Douglas Dias</p>
               <p className='text-xs text-zinc-400'>douglas@gmail.com</p>
             </div>
-          </div> */}
+          </div>
         </div>
 
         <div className='flex flex-col gap-2 border-b border-solid py-5'>
@@ -66,14 +66,7 @@ export function SidebarMenu() {
           </Button>
         </div>
 
-        <div className='flex flex-col gap-2 border-b border-solid py-5'>
-          {quickSearchOptions.map(({ title, imageUrl }) => (
-            <Button key={title} variant={'ghost'} className='justify-start gap-2'>
-              <Image src={imageUrl} alt={title} width={18} height={18} />
-              {title}
-            </Button>
-          ))}
-        </div>
+        <QuickSearchSidebar />
 
         <div className='flex flex-col py-5'>
           <Button variant={'ghost'} className='justify-start gap-2'>

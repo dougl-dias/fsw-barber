@@ -36,7 +36,7 @@ export function ServicesItem({ service }: ServicesItemProps) {
                 </Button>
               </SheetTrigger>
 
-              <SidebarBooking />
+              {/* <SidebarBooking /> */}
             </Sheet>
           </div>
         </div>

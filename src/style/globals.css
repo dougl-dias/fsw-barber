@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -121,19 +121,20 @@
 
 @layer base {
   * {
-    @apply antialiased border-border outline-ring/50;
+    @apply border-border outline-ring/50 antialiased;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground h-full;
   }
   html {
-    @apply font-sans;
+    @apply h-full font-sans;
   }
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
-  button:not(:disabled), [role="button"]:not(:disabled) {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
     cursor: pointer;
   }
 }

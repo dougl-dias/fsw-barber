@@ -1,54 +1,38 @@
 import Image from 'next/image'
 
-import { Search } from 'lucide-react'
-
-import { Header } from '@/components/layout/header'
-
 import { Avatar } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { BarbershopItem } from '@/components/barbershop-item'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { DivideSection } from '@/components/ui/divide-section'
-import { Input } from '@/components/ui/input'
-import { Section } from '@/components/section'
 
-import { quickSearchOptions } from '@/constants/search'
+import { BarbershopItem } from '@/components/barbershop-item'
+import { Section } from '@/components/section'
+import { Searchbar } from '@/components/searchbar'
 
 import { prisma } from '@/lib/prisma'
 import { Barbershop } from '@/generated/prisma/client'
+import { QuickSearch } from '@/components/quick-search'
 
 export default async function Home() {
   const barbershops: Barbershop[] = await prisma.barbershop.findMany({})
 
   return (
     <>
-      <Header />
-
       <main>
         <Section className='border-none'>
+          {/* Bem vindo */}
           <div>
             <h1 className='font-semibold'>Olá, Douglas</h1>
             <p className='text-sm'>Sexta, 2 de Fevereiro</p>
           </div>
 
-          <div className='flex items-center gap-2'>
-            <Input placeholder='Buscar Barbearias' className='text-sm' />
+          {/* Barra de busca */}
+          <Searchbar />
 
-            <Button>
-              <Search />
-            </Button>
-          </div>
+          {/* Busca rápida */}
+          <QuickSearch />
 
-          <div className='flex scrollbar-none gap-2 overflow-x-scroll p-1'>
-            {quickSearchOptions.map(({ title, imageUrl }) => (
-              <Button key={title} variant={'secondary'}>
-                <Image src={imageUrl} alt={title} width={16} height={16} />
-                <span className='text-sm'>{title}</span>
-              </Button>
-            ))}
-          </div>
-
+          {/* Banner */}
           <div className='relative h-36'>
             <Image
               src={'/banner-home.svg'}
@@ -60,6 +44,7 @@ export default async function Home() {
 
           <DivideSection title='Agendamentos' />
 
+          {/* Reserva */}
           <Card className='p-0'>
             <CardContent className='flex justify-between p-0'>
               {/* Booking info */}
@@ -89,6 +74,7 @@ export default async function Home() {
 
           <DivideSection title='Recomendados' />
 
+          {/* Barbearias Recomendadas */}
           <div className='flex scrollbar-none gap-3 overflow-x-scroll p-1'>
             {barbershops.map((barbershop) => (
               <div key={barbershop.id}>
@@ -99,6 +85,7 @@ export default async function Home() {
 
           <DivideSection title='Populares' />
 
+          {/* Barbearias Populares */}
           <div className='flex scrollbar-none gap-3 overflow-x-scroll p-1'>
             {barbershops.map((barbershop) => (
               <div key={barbershop.id}>
