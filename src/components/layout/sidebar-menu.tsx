@@ -42,7 +42,7 @@ export function SidebarMenu() {
             </Dialog>
           </div>
 
-          <div className='flex items-center gap-2.5'>
+          {/* <div className='flex items-center gap-2.5'>
             <Avatar className='border-primary size-12 overflow-hidden border-2'>
               <AvatarImage src='/avatar.png' alt='Nome' className='object-cover' />
             </Avatar>
@@ -51,7 +51,7 @@ export function SidebarMenu() {
               <p>Douglas Dias</p>
               <p className='text-xs text-zinc-400'>douglas@gmail.com</p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className='flex flex-col gap-2 border-b border-solid py-5'>

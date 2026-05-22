@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import { Header } from '@/components/layout/header'
+
 import { Avatar } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
@@ -18,6 +20,8 @@ export default async function Home() {
 
   return (
     <>
+      <Header />
+
       <main>
         <Section className='border-none'>
           {/* Bem vindo */}

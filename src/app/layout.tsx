@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { Footer } from '@/components/layout/footer'
-import { Header } from '@/components/layout/header'
 import { Toaster } from '@/components/ui/sonner'
 
 import { cn } from '@/lib/utils'
@@ -22,10 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang='pt-br' className={cn('dark', 'font-sans', inter.variable)}>
       <body className={`${inter.className}`}>
         <div className='flex h-full flex-col'>
-          <div className='flex-1'>
-            <Header />
-            {children}
-          </div>
+          <div className='flex-1'>{children}</div>
           <Footer />
         </div>
 
